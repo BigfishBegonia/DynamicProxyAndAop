@@ -64,18 +64,13 @@ public class BeanFactoryImpl implements BeanFactory{
                    e.printStackTrace();
                }
            }
-
-           if (classDefault != null) {
-               try {
-                   classDefault = Class.forName(strArr[0]);
-               } catch (ClassNotFoundException e) {
-                   e.printStackTrace();
-               }
-           }
            Object object = null;
-           object = classDefault.newInstance();
-           setExtend(classDefault,object);
-           return this.addDynamicProxy(object);
+           if (classDefault != null) {
+               object = classDefault.newInstance();
+               setExtend(classDefault,object);
+               return this.addDynamicProxy(object);
+           }
+         
        }catch (Exception e){
            e.printStackTrace();
        }
